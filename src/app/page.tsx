@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Menu, X, Instagram, Twitter, Linkedin, Mail, Phone } from 'lucide-react';
+import { Menu, X, Instagram, Twitter, Linkedin, Mail, Phone } from 'lucide-react';
+import Image from 'next/image'; // Import Next.js Image component
 
 export default function ThiqafAgency() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,7 @@ export default function ThiqafAgency() {
     {
       title: 'Social Media Management',
       description: 'Strategic social media presence that builds communities and drives engagement. From content creation to analytics.',
-      features: ['Content Strategy', 'Community Building', 'Analytics & Insights', 'Brand Consistency'],
+      features: ['Content Strategy', 'Community Building', 'Analytics &amp; Insights', 'Brand Consistency'],
     },
     {
       title: 'Brand Development',
@@ -125,7 +126,7 @@ export default function ThiqafAgency() {
             </div>
           </div>
           <div className="relative">
-            <img src="https://via.placeholder.com/400x300?text=Hero+Image" alt="Hero" className="rounded-lg shadow-lg" />
+            <Image src="https://via.placeholder.com/400x300?text=Hero+Image" alt="Hero" width={400} height={300} className="rounded-lg shadow-lg" />
           </div>
         </div>
       </section>
@@ -140,7 +141,7 @@ export default function ThiqafAgency() {
           <div className="grid md:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <div key={index} className="bg-gray-900 rounded-lg p-6 shadow-lg">
-                <img src={`https://via.placeholder.com/300x200?text=${service.title}`} alt={service.title} className="rounded-lg mb-4" />
+                <Image src={`https://via.placeholder.com/300x200?text=${service.title}`} alt={service.title} width={300} height={200} className="rounded-lg mb-4" />
                 <h3 className="text-xl font-bold mb-2">{service.title}</h3>
                 <p className="text-gray-400 mb-4">{service.description}</p>
                 <ul className="space-y-2 text-sm text-gray-300">
@@ -168,7 +169,7 @@ export default function ThiqafAgency() {
               </span>
             </h2>
             <p className="text-lg text-gray-400">
-              At thiqaf, we believe that great design is more than just aesthetics—it's about creating meaningful connections between brands and their audiences. Our team combines creative vision with strategic thinking to deliver solutions that not only look exceptional but also drive real business results.
+              At thiqaf, we believe that great design is more than just aesthetics—it&apos;s about creating meaningful connections between brands and their audiences. Our team combines creative vision with strategic thinking to deliver solutions that not only look exceptional but also drive real business results.
             </p>
           </div>
           <div className="space-y-6">
@@ -212,9 +213,9 @@ export default function ThiqafAgency() {
       <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-900">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12">
           <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold">Let's Work Together</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">Let&apos;s Work Together</h2>
             <p className="text-lg text-gray-400">
-              Ready to elevate your digital presence? Get in touch and let's discuss how we can bring your vision to life.
+              Ready to elevate your digital presence? Get in touch and let&apos;s discuss how we can bring your vision to life.
             </p>
             <div className="space-y-4">
               <div className="flex items-center gap-4">
@@ -281,7 +282,7 @@ export default function ThiqafAgency() {
           </div>
         </div>
         <div className="mt-4 text-center text-gray-500 text-sm">
-          © 2025 thiqaf. All rights reserved.
+          &copy; 2024 thiqaf. All rights reserved.
         </div>
       </footer>
     </div>
