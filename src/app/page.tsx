@@ -236,6 +236,10 @@ const translations: Translations = {
   },
 };
 
+// Define service keys for type-safe access
+const serviceKeys = ["webDesign", "socialMedia", "brandDevelopment"] as const;
+type ServiceKey = (typeof serviceKeys)[number];
+
 const services: Service[] = [
   {
     title: translations.en.services.webDesign.title,
@@ -298,10 +302,17 @@ export default function ThiqafAgency() {
   const t = translations[language];
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-gray-900 to-black text-white font-sans ${language === "ar" ? "font-arabic" : "font-inter"}`} dir={language === "ar" ? "rtl" : "ltr"}>
+    <div
+      className={`min-h-screen bg-gradient-to-b from-gray-900 to-black text-white font-sans ${
+        language === "ar" ? "font-arabic" : "font-inter"
+      }`}
+      dir={language === "ar" ? "rtl" : "ltr"}
+    >
       {/* Navigation */}
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-black/95 backdrop-blur-lg shadow-xl" : "bg-transparent"}`}
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+          scrolled ? "bg-black/95 backdrop-blur-lg shadow-xl" : "bg-transparent"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
@@ -331,12 +342,17 @@ export default function ThiqafAgency() {
               <button
                 onClick={toggleLanguage}
                 className="px-3 py-1 bg-purple-600 rounded-full text-sm font-semibold hover:bg-purple-700 transition-colors"
+                aria-label={language === "en" ? "Switch to Arabic" : "Switch to English"}
               >
                 {language === "en" ? "العربية" : "English"}
               </button>
             </div>
 
-            <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <button
+              className="md:hidden text-white"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -361,6 +377,7 @@ export default function ThiqafAgency() {
               <button
                 onClick={toggleLanguage}
                 className="w-full text-left px-3 py-1 bg-purple-600 rounded-full text-sm font-semibold hover:bg-purple-700 transition-colors"
+                aria-label={language === "en" ? "Switch to Arabic" : "Switch to English"}
               >
                 {language === "en" ? "العربية" : "English"}
               </button>
@@ -392,7 +409,7 @@ export default function ThiqafAgency() {
           <div className="relative">
             <Image
               src="https://via.placeholder.com/500x400?text=Hero+Image"
-              alt="Hero"
+              alt={t.hero.title}
               width={500}
               height={400}
               className="rounded-2xl shadow-2xl animate-slide-in"
@@ -415,15 +432,15 @@ export default function ThiqafAgency() {
               >
                 <Image
                   src={`https://via.placeholder.com/300x200?text=${service.title}`}
-                  alt={t.services[Object.keys(t.services)[index + 2]].title}
+                  alt={t.services[serviceKeys[index]].title}
                   width={300}
                   height={200}
                   className="rounded-lg mb-4"
                 />
-                <h3 className="text-xl font-bold mb-2">{t.services[Object.keys(t.services)[index + 2]].title}</h3>
-                <p className="text-gray-300 mb-4">{t.services[Object.keys(t.services)[index + 2]].description}</p>
+                <h3 className="text-xl font-bold mb-2">{t.services[serviceKeys[index]].title}</h3>
+                <p className="text-gray-300 mb-4">{t.services[serviceKeys[index]].description}</p>
                 <ul className="space-y-2 text-sm text-gray-400">
-                  {t.services[Object.keys(t.services)[index + 2]].features.map((feature, idx) => (
+                  {t.services[serviceKeys[index]].features.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-purple-400 rounded-full"></span>
                       {feature}
@@ -501,7 +518,7 @@ export default function ThiqafAgency() {
                   <Mail size={24} />
                 </div>
                 <div>
-                  <div className="font-semibold">{t.contact.email}</div>
+                  <div className="font-semibold">{language === "en" ? "Email" : "البريد الإلكتروني"}</div>
                   <div className="text-gray-300">{t.contact.email}</div>
                 </div>
               </div>
@@ -519,18 +536,21 @@ export default function ThiqafAgency() {
               <a
                 href="#"
                 className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-purple-600 transition-colors"
+                aria-label="Instagram"
               >
                 <Instagram size={24} />
               </a>
               <a
                 href="#"
                 className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-purple-600 transition-colors"
+                aria-label="Twitter"
               >
                 <Twitter size={24} />
               </a>
               <a
                 href="#"
                 className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center hover:bg-purple-600 transition-colors"
+                aria-label="LinkedIn"
               >
                 <Linkedin size={24} />
               </a>
@@ -598,21 +618,3 @@ export default function ThiqafAgency() {
     </div>
   );
 }
-
-// Animation for slide-in effect
-const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Amiri:wght@400;700&display=swap');
-  .font-inter {
-    font-family: 'Inter', sans-serif;
-  }
-  .font-arabic {
-    font-family: 'Amiri', serif;
-  }
-  .animate-slide-in {
-    animation: slideIn 0.5s ease-out;
-  }
-  @keyframes slideIn {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-`;
